@@ -1,0 +1,25 @@
+# Binaries
+helm.exe
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Logs
+*.log
+portforward.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.bak

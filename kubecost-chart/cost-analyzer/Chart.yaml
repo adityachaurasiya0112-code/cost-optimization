@@ -1,0 +1,16 @@
+annotations:
+  artifacthub.io/links: |
+    - name: Homepage
+      url: https://www.kubecost.com
+apiVersion: v2
+appVersion: 2.9.7
+dependencies:
+- alias: finopsagent
+  condition: finopsagent.enabled
+  name: finops-agent
+  repository: https://kubecost.github.io/finops-agent-chart
+  version: v1.0.20
+description: Kubecost Helm chart - monitor your cloud costs!
+icon: https://raw.githubusercontent.com/kubecost/.github/9602bea0c06773da66ba43cb9ce5e1eb2b797c32/kubecost_logo.png
+name: cost-analyzer
+version: 2.9.7

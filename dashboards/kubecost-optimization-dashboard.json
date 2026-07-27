@@ -1,0 +1,87 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "#6A6A6A",
+        "name": "Annotations & Alerts",
+        "type": "annotations"
+      }
+    ]
+  },
+  "description": "Kubecost optimization dashboard with allocation, usage gap, and savings panels.",
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "type": "graph",
+      "title": "Requested vs Actual CPU (deployment)",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "expr": "sum by (namespace, deployment) (kube_pod_container_resource_requests_cpu_cores{resource=\"cpu\"})",
+          "legendFormat": "{{namespace}}/{{deployment}} requested"
+        },
+        {
+          "expr": "sum by (namespace, deployment) (rate(container_cpu_usage_seconds_total{image!\"\",container!\"POD\"}[5m]))",
+          "legendFormat": "{{namespace}}/{{deployment}} actual"
+        }
+      ]
+    },
+    {
+      "type": "graph",
+      "title": "Requested vs Actual Memory (deployment)",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "targets": [
+        {
+          "expr": "sum by (namespace, deployment) (kube_pod_container_resource_requests_memory_bytes{resource=\"memory\"})",
+          "legendFormat": "{{namespace}}/{{deployment}} requested"
+        },
+        {
+          "expr": "sum by (namespace, deployment) (container_memory_working_set_bytes{image!\"\",container!\"POD\"})",
+          "legendFormat": "{{namespace}}/{{deployment}} actual"
+        }
+      ]
+    },
+    {
+      "type": "graph",
+      "title": "Estimated CPU + Memory Cost",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "targets": [
+        {
+          "expr": "sum(kubecost_cpu_cost) + sum(kubecost_memory_cost)",
+          "legendFormat": "cost"
+        }
+      ]
+    },
+    {
+      "type": "graph",
+      "title": "Allocation Waste: CPU and Memory",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "targets": [
+        {
+          "expr": "sum(kubecost_waste_cpu_cores)",
+          "legendFormat": "CPU wasted cores"
+        },
+        {
+          "expr": "sum(kubecost_waste_memory_bytes)",
+          "legendFormat": "Memory wasted bytes"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 36,
+  "style": "dark",
+  "tags": ["kubecost", "cost", "optimization"],
+  "templating": { "list": [] },
+  "time": { "from": "now-6h", "to": "now" },
+  "timepicker": {},
+  "timezone": "browser",
+  "version": 1
+}
