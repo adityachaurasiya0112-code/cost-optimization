@@ -8,7 +8,6 @@ It guides a beginner DevOps engineer through installing Kubecost on a local clus
 - Add cost visibility and optimization on top of an existing Kubernetes + Prometheus + Grafana setup.
 - Track cluster-level spend, identify over-provisioned CPU/memory, and suggest optimized requests/limits.
 - Build dashboard panels for requested vs actual usage and estimated savings.
-- Capture before/after metrics for a CV-friendly result.
 
 ## What is included
 
